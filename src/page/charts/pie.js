@@ -1,4 +1,5 @@
 import React from "react";
+import { Card } from 'antd';
 import {
   Chart,
   Geom,
@@ -90,6 +91,99 @@ class Pie extends React.Component {
     };
     return (
       <div>
+        <Card title="Default size card" extra={<a href="https://www.baidu.com/">More</a>} style={{ width: 600,float:'left' }}>
+        <div>
+          <Chart data={data} padding={40} forceFit>
+            <Coord type="theta" radius={0.8} />
+            <Tooltip showTitle={false} />
+            <View data={dv}>
+              <Coord type="theta" innerRadius={0.9} />
+              <Geom
+                type="intervalStack"
+                position="percent"
+                color={["type", ["rgba(255, 255, 255, 0)"]]}
+                style={{
+                  stroke: "#444",
+                  lineWidth: 1
+                }}
+              />
+              <Guide>
+                <Text
+                  position={["50%", "50%"]}
+                  content="24 hours"
+                  style={{
+                    lineHeight: "240px",
+                    fontSize: "48",
+                    fill: "#262626",
+                    textAlign: "center"
+                  }}
+                />
+              </Guide>
+            </View>
+            <View data={data}>
+              <Coord type="polar" innerRadius={0.9} />
+              <Geom
+                type="interval"
+                position="type*value"
+                color="#444"
+                size={[
+                  "type",
+                  function (val) {
+                    if (val % 3 === 0) {
+                      return 4;
+                    } else {
+                      return 0;
+                    }
+                  }
+                ]}
+                style={{
+                  stroke: "#444",
+                  lineWidth: 1
+                }}
+              >
+                <Label
+                  content={[
+                    "type",
+                    function (val) {
+                      if (val % 3 === 0) {
+                        return text[val / 3];
+                      }
+
+                      return "";
+                    }
+                  ]}
+                  offset={15}
+                  textStyle={{
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    fill: "#bfbfbf"
+                  }}
+                />
+              </Geom>
+              <Guide>
+                <Text
+                  position={["50%", "50%"]}
+                  content="24 hours"
+                  style={{
+                    lineHeight: "240px",
+                    fontSize: "48",
+                    fill: "#609064",
+                    textAlign: "center"
+                  }}
+                />
+              </Guide>
+            </View>
+            <View data={userDv} scale={cols}>
+              <Coord type="theta" innerRadius={0.75} />
+              <Geom type="intervalStack" position="percent" color={"type"}>
+                <Label content="type" offset={40} />
+              </Geom>
+            </View>
+          </Chart>
+        </div>
+      </Card>
+      <Card title="Default size card" extra={<a href="https://www.baidu.com/">More</a>} style={{ width: 600,float:'left',marginLeft:10 }}>
+      <div>
         <Chart data={data} padding={40} forceFit>
           <Coord type="theta" radius={0.8} />
           <Tooltip showTitle={false} />
@@ -125,7 +219,7 @@ class Pie extends React.Component {
               color="#444"
               size={[
                 "type",
-                function(val) {
+                function (val) {
                   if (val % 3 === 0) {
                     return 4;
                   } else {
@@ -141,7 +235,7 @@ class Pie extends React.Component {
               <Label
                 content={[
                   "type",
-                  function(val) {
+                  function (val) {
                     if (val % 3 === 0) {
                       return text[val / 3];
                     }
@@ -177,6 +271,8 @@ class Pie extends React.Component {
             </Geom>
           </View>
         </Chart>
+      </div>
+    </Card>
       </div>
     );
   }

@@ -12,6 +12,7 @@ export const LeftNavWrapper = styled.div`
       height:40px;
       width:40px;
       margin:0 15px;
+      border-radius:50%;
     }
     h1 {
       color: white;

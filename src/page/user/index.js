@@ -1,170 +1,160 @@
 import React, { Component } from 'react';
 
-import { Card, Table, Divider, Tag } from 'antd';
+import { Card, Table, Divider, Button, Modal, message } from 'antd';
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a href='https://www.baidu.com'>{text}</a>,
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
-      <span>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </span>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a href='https://www.baidu.com'>Invite {record.name}</a>
-        <Divider type="vertical" />
-        <a href='https://www.baidu.com'>Delete</a>
-      </span>
-    ),
-  },
-];
+import LinkButton from '../../components/link-button'
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '4',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '5',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '6',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '7',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '8',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '9',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '10',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '11',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '12',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '13',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '14',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  }
-];
+import UserForm from './user-form'
+
+import { reqAllUsers, reqAddUser, reqUpdateUser, reqDeleteUser } from '../../api'
 
 class User extends Component {
+  state = {
+    visible: false,
+    users: [],
+    roles: []
+  }
+  componentWillMount() {
+    this.columns = [
+      {
+        title: '用户名',
+        dataIndex: 'username'
+      },
+      {
+        title: '邮箱',
+        dataIndex: 'email'
+      },
+      {
+        title: '电话',
+        dataIndex: 'phone'
+      },
+      {
+        title: '注册时间',
+        dataIndex: 'create_time'
+      },
+      {
+        title: '所属角色',
+        dataIndex: 'role_id',
+        render: (role_id) => {
+          return this.roleNames[role_id]
+        }
+      },
+      {
+        title: '操作',
+        render: (user) => (
+          <span>
+            <LinkButton onClick={() => this.showUpdate(user)}>修改</LinkButton>
+            <Divider type="vertical" />
+            <LinkButton onClick={() => this.deleteUser(user)}>删除</LinkButton>
+          </span>
+        ),
+      },
+    ];
+  }
+  componentDidMount() {
+    this.getAllUsers()
+  }
+  deleteUser = async (user) => {
+    Modal.confirm({
+      content: `确定要删除${user.username}吗?`,
+      onOk:async () => {
+        const res = await reqDeleteUser(user._id)
+        if (res.status === 0) {
+          message.success('删除用户成功')
+          this.getAllUsers()
+        }
+      }
+    })
+  }
+  getAllUsers = async () => {
+    const { status, data } = await reqAllUsers()
+    if (status === 0) {
+      const { users, roles } = data
+      this.initRoleNames(roles)
+      this.setState({
+        users, roles
+      })
+    }
+  }
+  initRoleNames = (roles) => {
+    const roleNames = roles.reduce((acc, cur) => {
+      acc[cur._id] = cur.name
+      return acc
+    }, {})
+    this.roleNames = roleNames
+  }
+
+  showUpdate = (user) => {
+    console.log(user)
+    this.user = user
+    this.setState({
+      visible: true,
+    });
+  };
+  handleOk = () => {
+    this.form.validateFields(async (err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+        this.setState({
+          visible: false,
+        });
+        this.form.resetFields()
+        let res
+        if (this.user) {
+          values._id = this.user._id
+          res = await reqUpdateUser(values)
+        } else {
+          res = await reqAddUser(values)
+        }
+        if (res.status === 0) {
+          message.success(`${this.user ? '修改' : '添加'}用户成功`)
+          this.getAllUsers()
+        }
+      }
+    });
+  };
+
+  handleCancel = e => {
+    // console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+  showAddModal = () => {
+    this.user = null
+    this.setState({
+      visible: true
+    })
+  }
   render() {
+    const { users, roles } = this.state
+    const user = this.user || {}
+    const title = (
+      <Button onClick={this.showAddModal} type='primary'>创建用户</Button>
+    )
     return (
       <div>
-        <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: '100%' }}>
-          <Table 
-          columns={columns} 
-          dataSource={data}   
-          pagination={{defaultPageSize: 10, showQuickJumper: true}}
-          bordered 
+        <Card title={title} style={{ width: '100%' }}>
+          <Table
+            rowKey="_id"
+            columns={this.columns}
+            dataSource={users}
+            pagination={{ defaultPageSize: 6, showQuickJumper: true }}
+            bordered
           />
         </Card>
+        <Modal
+          title={user._id?'修改用户':'添加用户'}
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <UserForm
+            roles={roles}
+            user={user}
+            setForm={(form) => { this.form = form }}
+          ></UserForm>
+        </Modal>
       </div>
     );
   }

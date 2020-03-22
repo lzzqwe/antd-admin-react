@@ -157,7 +157,7 @@ class Order extends Component {
   render() {
     return (
       <div>
-        <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: '100%' }}>
+        <Card title="Default size card"  style={{ width: '100%' }}>
           <Table 
           columns={columns} 
           dataSource={data}   

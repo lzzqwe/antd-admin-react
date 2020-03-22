@@ -1,4 +1,5 @@
 import React from "react";
+import { Card } from 'antd';
 import {
   Chart,
   Geom,
@@ -186,35 +187,37 @@ class Bar extends React.Component {
       "Strongly Disagree": "#CB2920"
     };
     return (
-      <div style={{paddingLeft:15}}>
-        <Chart data={dv} forceFit>
-          <Axis name="type" title={null} labelOffset={10} />
-          <Axis
-            name="value"
-            title={null}
-            tickLine={null}
-            position="right"
-            formatter={function(val) {
-              return val + "%";
-            }}
-          />
-          <Coord transpose />
-          <Tooltip />
-          <Legend />
-          <Geom
-            type="intervalStack"
-            position="type*value"
-            color={[
-              "opinion",
-              function(opinion) {
-                return colorMap[opinion];
-              }
-            ]}
-            shape="smooth"
-            opacity={0.8}
-          />
-        </Chart>
-      </div>
+      <Card title="柱形图实例">
+        <div style={{ paddingLeft: 15 }}>
+          <Chart data={dv} forceFit>
+            <Axis name="type" title={null} labelOffset={10} />
+            <Axis
+              name="value"
+              title={null}
+              tickLine={null}
+              position="right"
+              formatter={function (val) {
+                return val + "%";
+              }}
+            />
+            <Coord transpose />
+            <Tooltip />
+            <Legend />
+            <Geom
+              type="intervalStack"
+              position="type*value"
+              color={[
+                "opinion",
+                function (opinion) {
+                  return colorMap[opinion];
+                }
+              ]}
+              shape="smooth"
+              opacity={0.8}
+            />
+          </Chart>
+        </div>
+      </Card>
     );
   }
 }

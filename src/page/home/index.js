@@ -58,9 +58,9 @@ class Home extends React.Component {
           />
         </Card>
         <Line></Line>
-        <div style={{ position: 'absolute', top: 300, left: 24, right: 24 }}>
+        <div style={{ position: 'absolute', top: 300,left: 24, right: 24 }}>
           <Card
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%'}}
             tabList={tabList}
             tabBarExtraContent={<RangePicker renderExtraFooter={() => 'extra footer'} showTime />}
             activeTabKey={this.state.key}

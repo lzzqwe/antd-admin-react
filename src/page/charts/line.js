@@ -1,4 +1,5 @@
 import React from "react";
+import { Card } from 'antd';
 import {
   Chart,
   Geom,
@@ -116,7 +117,7 @@ class Line extends React.Component {
     const scale = {
       value: {
         alias: "The Share Price in Dollars",
-        formatter: function(val) {
+        formatter: function (val) {
           return "$" + val;
         }
       },
@@ -125,26 +126,28 @@ class Line extends React.Component {
       }
     };
     return (
-      <div>
-        <Chart
-          data={dv}
-          padding={"auto"}
-          scale={scale}
-          forceFit
-        >
-          <Tooltip crosshairs />
-          <Axis />
-          <Legend />
-          <Geom type="area" position="year*value" color="type" shape="smooth" />
-          <Geom
-            type="line"
-            position="year*value"
-            color="type"
-            shape="smooth"
-            size={2}
-          />
-        </Chart>
-      </div>
+      <Card title="Default size card">
+        <div>
+          <Chart
+            data={dv}
+            padding={"auto"}
+            scale={scale}
+            forceFit
+          >
+            <Tooltip crosshairs />
+            <Axis />
+            <Legend />
+            <Geom type="area" position="year*value" color="type" shape="smooth" />
+            <Geom
+              type="line"
+              position="year*value"
+              color="type"
+              shape="smooth"
+              size={2}
+            />
+          </Chart>
+        </div>
+      </Card>
     );
   }
 }
