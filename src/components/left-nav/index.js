@@ -13,105 +13,6 @@ import { LeftNavWrapper } from './style'
 const { SubMenu } = Menu;
 
 class LeftNav extends React.Component {
-
-  // {
-  // _id: "5e63c9fb63bb513884025164"
-  // username: "lzzqwe"
-  // password: "e10adc3949ba59abbe56e057f20f883e"
-  // phone: "15393597399"
-  // email: "352840359@qq.com"
-  // role_id: "5e6b53262755b42d5c78119d"
-  // create_time: 1583598075378
-  // role: {
-  //   menus: Array(12)
-  //   0: "/home"
-  //   1: "/user"
-  //   2: "/role"
-  //   3: "/charts"
-  //   4: "/charts/bar"
-  //   5: "/charts/line"
-  //   6: "/charts/pie"
-  //   7: "/order"
-  //   8: "all"
-  //   9: "/products"
-  //   10: "/category"
-  //   11: "/product"
-  //   length: 12
-  //   __proto__: Array(0)
-  //   _id: "5e6b53262755b42d5c78119d"
-  //   name: "test"
-  //   create_time: 1584091942427
-  //   __v: 0
-  //   auth_name: "lzzqwe"
-  //   auth_time: 1584457683750
-  // }
-  // }
-
-  // const menuList = [
-  //   {
-  //     key: '/home',
-  //     title: '首页',
-  //     icon: 'home',
-  //  isPublic:true
-  //   },
-  //   {
-  //     key: '/products',
-  //     title: '商品',
-  //     icon: 'appstore',
-  //     children: [
-  //       {
-  //         key: '/category',
-  //         title: '品类管理',
-  //         icon: 'bars'
-  //       },
-  //       {
-  //         key: '/product',
-  //         title: '商品管理',
-  //         icon: 'tool'
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: '用户管理',
-  //     key: '/user',
-  //     icon: 'user'
-  //   },
-  //   {
-  //     title: '角色管理',
-  //     key: '/role',
-  //     icon: 'safety',
-  //   },
-
-  //   {
-  //     title: '图形图表',
-  //     key: '/charts',
-  //     icon: 'area-chart',
-  //     children: [
-  //       {
-  //         title: '柱形图',
-  //         key: '/charts/bar',
-  //         icon: 'bar-chart'
-  //       },
-  //       {
-  //         title: '折线图',
-  //         key: '/charts/line',
-  //         icon: 'line-chart'
-  //       },
-  //       {
-  //         title: '饼图',
-  //         key: '/charts/pie',
-  //         icon: 'pie-chart'
-  //       },
-  //     ]
-  //   },
-
-  //   {
-  //     title: '订单管理',
-  //     key: '/order',
-  //     icon: 'windows',
-  //   },
-  // ]
-
   hasAuth = (item) => {
     const { key, isPublic } = item
     const menus = memoryUtils.user.role.menus
@@ -172,7 +73,7 @@ class LeftNav extends React.Component {
   }
   render() {
     let path = this.props.location.pathname
-    console.log(path)
+    // console.log(path)
     if (path.indexOf('/product') === 0) { // 当前请求的是商品或其子路由界面
       path = '/product'
     }

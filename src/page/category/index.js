@@ -49,12 +49,11 @@ class Category extends Component {
     this._getCategory(this.state.parentId)
   }
   showSubCategorys = (category) => {
-    console.log(category)
     this.setState({
       parentId: category._id,
       parentName: category.name
     }, () => {
-      console.log('parentId' + this.state.parentId)
+      // console.log('parentId' + this.state.parentId)
       // 获取二级分类列表显示
       this._getCategory()
     })
@@ -86,7 +85,6 @@ class Category extends Component {
   }
   updateModal = (category) => {
     // 保存对象
-    // console.log(category)
     this.category = category
     this.setState({
       showStatus: 1,
@@ -101,7 +99,6 @@ class Category extends Component {
         });
         const { parentId, categoryName } = value
         // 重置一组输入控件的值
-        console.log(parentId, categoryName)
         this.form.resetFields()
         const result = await addCategory(parentId, categoryName)
         if (result.status === 0) {
@@ -123,7 +120,6 @@ class Category extends Component {
         this.setState({
           showStatus: 0,
         })
-        console.log(value)
         //获取数据
         // const {parentId} = this.category
         const categoryId = this.category._id

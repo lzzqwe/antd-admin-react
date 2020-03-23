@@ -27,7 +27,7 @@ class Home extends React.Component {
   };
 
   onTabChange = (key, type) => {
-    console.log(key, type);
+    // console.log(key, type);
     this.setState({ [type]: key });
   };
   render() {

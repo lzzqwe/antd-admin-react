@@ -44,7 +44,7 @@ class AddUpdate extends Component {
   }
   componentDidMount() {
     this._getCategory('0')
-    console.log(this.props.location.state)
+    // console.log(this.props.location.state)
   }
   initOptions = (categories) => {
     const options = categories.map((item) => {
@@ -70,7 +70,7 @@ class AddUpdate extends Component {
     }
   }
   loadData = async (selectedOptions) => {
-    console.log(selectedOptions)
+    // console.log(selectedOptions)
     const targetOption = selectedOptions[selectedOptions.length - 1];
     targetOption.loading = true;
     const subCategory = await this._getCategory(targetOption.value)

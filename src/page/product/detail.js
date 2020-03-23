@@ -20,7 +20,7 @@ class ProductDetail extends Component {
       })
     } else {
       const results = await Promise.all([reqCategory(pCategoryId),reqCategory(categoryId)])
-      console.log(results)
+      // console.log(results)
       const cName1 = results[0].data.name
       const cName2 = results[1].data.name
       this.setState({

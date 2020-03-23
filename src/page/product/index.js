@@ -14,7 +14,7 @@ class Product extends Component {
       <Switch>
         <Route exact path='/product' component={ProductHome}></Route>
         <Route path='/product/detail' component={ProductDetail}></Route>
-        <Route path='/product/addupdate' component={AddUpdate}></Route>
+        <Route path='/product/addUpdate' component={AddUpdate}></Route>
         <Redirect to='/product'/>
       </Switch>
     );

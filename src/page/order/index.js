@@ -161,7 +161,7 @@ class Order extends Component {
           <Table 
           columns={columns} 
           dataSource={data}   
-          pagination={{defaultPageSize: 10, showQuickJumper: true}}
+          pagination={{defaultPageSize: 8, showQuickJumper: true}}
           bordered 
           />
         </Card>

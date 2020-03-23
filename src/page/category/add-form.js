@@ -14,31 +14,11 @@ class AddForm extends React.Component {
     parentId: PropTypes.string.isRequired,
     categories: PropTypes.array.isRequired
   }
-
-  // componentDidMount() {
-  //   // To disable submit button at the beginning.
-  //   this.props.form.validateFields();
-  // }
-
   UNSAFE_componentWillMount() {
     this.props.setForm(this.props.form)
   }
-
-  // handleChange =(value) => {
-  //   console.log(`selected ${value}`);
-  // }
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.props.form.validateFields((err, values) => {
-  //     if (!err) {
-  //       console.log('Received values of form: ', values);
-  //     }
-  //   });
-  // };
-
   render() {
-    // getFieldDecorator 用于和表单进行双向绑定，详见下方描述
+    // getFieldDecorator 用于和表单进行双向绑定
     const { getFieldDecorator } = this.props.form;
     const { parentId, categories } = this.props
     return (

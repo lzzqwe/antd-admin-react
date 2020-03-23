@@ -18,7 +18,7 @@ class Login extends Component {
     e.preventDefault();
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         const {username,password} = values
         const result = await reqLogin(username,password)
         if(result.status === 0) {

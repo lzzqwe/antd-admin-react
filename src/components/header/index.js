@@ -15,10 +15,6 @@ class AdminHeader extends Component {
     temperature:'',
     currentTime:formateTime(Date.now())
   }
-
-  handleClick = () => {
-    console.log(this.props)
-  }
   getWeather = async (city) => {
      const {dayPictureUrl, weather,temperature} = await reqWeather(city)
      this.setState({
@@ -74,8 +70,7 @@ class AdminHeader extends Component {
     return (
       <Header style={{ backgroundColor: '#ffff', height: 80, lineHeight: 80, padding: 0 }}>
         <HeadTop>
-          <span 
-          onClick={this.handleClick} 
+          <span
           className='welcome'>欢迎,{memoryUtils.user?memoryUtils.user.username:''}</span>
           <span 
           className='logout'

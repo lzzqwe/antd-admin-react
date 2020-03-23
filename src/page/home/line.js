@@ -3,7 +3,7 @@ import React from 'react';
 import { Chart, Axis, Tooltip, Geom, Legend, View } from 'bizcharts';
 import DataSet from '@antv/data-set';
 
-console.log(DataSet)
+// console.log(DataSet)
 
 
 // 下面的代码会被作为 cdn script 注入 注释勿删
@@ -34,7 +34,7 @@ dv.transform({
   .transform({
     type: 'filter',
     callback: (d) => {
-      console.log(ds.state.type);
+      // console.log(ds.state.type);
       return d.type !== ds.state.type;
     }
   });

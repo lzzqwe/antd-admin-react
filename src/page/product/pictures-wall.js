@@ -58,9 +58,9 @@ class PicturesWall extends Component {
   }
 
   handleChange = async ({ file, fileList }) => {
-    console.log(file)
-    console.log(fileList)
-    debugger
+    // console.log(file)
+    // console.log(fileList)
+    // debugger
     if (file.status === 'done') {
       // debugger
       const result = file.response
@@ -75,6 +75,7 @@ class PicturesWall extends Component {
       }
     } else if(file.status === 'removed') {
        const result = await reqDeleteImage(file.name)
+      //  console.log(result)
        if(result.status === 0) {
          message.success('删除图片成功')
        } else {

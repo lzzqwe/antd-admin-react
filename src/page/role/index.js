@@ -53,7 +53,7 @@ class Role extends Component {
   getRoleList = async () => {
     const { status, data } = await reqRoleList()
     if (status === 0) {
-      console.log(data)
+      // console.log(data)
       this.setState({
         roles: data
       })
@@ -62,39 +62,13 @@ class Role extends Component {
   componentDidMount() {
     this.getRoleList()
   }
-  // componentWillMount() {
-  //   this.columns = [
-  //     {
-  //       title: '角色名称',
-  //       dataIndex: 'name',
-  //       key: 'name'
-  //     },
-  //     {
-  //       title: '创建时间',
-  //       dataIndex: 'create_time',
-  //       key: 'create_time',
-  //       render:(create_time) => <span>{formateTime(create_time)}</span>  
-  //     },
-  //     {
-  //       title: '授权时间',
-  //       dataIndex: 'auth_time',
-  //       key: 'auth_time',
-  //       render:(auth_time) => <span>{formateTime(auth_time)}</span>
-  //     },
-  //     {
-  //       title: '授权人',
-  //       dataIndex: 'auth_name',
-  //       key: 'auth_name',
-  //     },
-  //   ];
-  // }
   addRole = ()=> {
     this.form.validateFields(async (err, values) => {
       if (!err) {
         this.setState({
           isShowAdd: false,
         });
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         const { roleName } = values
         const res = await reqAddRole(roleName)
         if (res.status === 0) {
@@ -116,7 +90,7 @@ class Role extends Component {
     role.auth_name = memoryUtils.user.username
     const result = await reqUpdateRole(role)
     if(result.status === 0) {
-       console.log(memoryUtils.user)
+      //  console.log(memoryUtils.user)
        if(role._id === memoryUtils.user.role_id) {
         memoryUtils.user = {}
         storage.deleteUser()
